@@ -65,7 +65,7 @@ public class main {
  		
  		JButton button_1 = new JButton("关于程序");
  		button_1.setBounds(131, 138, 93, 23);
- 		button_1.setEnabled(false);
+ 		button_1.setEnabled(true);
  		frmSvamc.getContentPane().add(button_1);
         
  		frmSvamc.setVisible(true);
