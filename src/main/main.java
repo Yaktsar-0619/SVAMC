@@ -17,7 +17,7 @@ public class main {
      protected static void frame() {
     	 //以下是窗体本身相关构造代码
         JFrame frmSvamc;
-        JTextField textField;
+        final JTextField textField;
     	mainframe window = new mainframe();
     	frmSvamc = new JFrame();
  		frmSvamc.setResizable(false);
@@ -46,7 +46,7 @@ public class main {
  		label_1.setBounds(10, 64, 103, 15);
  		frmSvamc.getContentPane().add(label_1);
  		//单选框代码
- 		JRadioButton radioButton = new JRadioButton("是");
+ 		final JRadioButton radioButton = new JRadioButton("是");
  		radioButton.setBounds(108, 60, 47, 23);
  		frmSvamc.getContentPane().add(radioButton);
  		
@@ -65,7 +65,7 @@ public class main {
  		
  		JButton button_1 = new JButton("关于程序");
  		button_1.setBounds(131, 138, 93, 23);
- 		button_1.setEnabled(true);
+ 		button_1.setEnabled(false);
  		frmSvamc.getContentPane().add(button_1);
         
  		frmSvamc.setVisible(true);
