@@ -1,6 +1,7 @@
 package main;
 import java.awt.Canvas;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -11,6 +12,8 @@ import java.text.SimpleDateFormat;
 
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import org.json.*;
 
 import java.awt.List;
@@ -18,7 +21,7 @@ public class kawashironitoriproject {
 	/*
 	 * @
 	 */
-	public static class main{
+	public static class kawashironitri{
 		public static int [] resultlist = new int[200000];
     	public static boolean [] result;
     	private static String htmldata;
@@ -62,6 +65,7 @@ public class kawashironitoriproject {
             		 int maxpeo = datasget.getPositionsOccupied();
             		 int islocaled = datasget.getRegGroupLimit();
             		 String startdate = datasget.getStartDate();
+            		 String pname = datasget.ProgramName();
             		 int prsyea = Integer.parseInt(startdate.substring(0,4));
             		 int prsmon = Integer.parseInt(startdate.substring(5,7));
             		 int prsday = Integer.parseInt(startdate.substring(8,10));
@@ -72,6 +76,22 @@ public class kawashironitoriproject {
             					 if(prsmon >= intmon) {
             						 if(prsday > intday) {
             							 resultlist[size] = mao;
+            							 String listofmenu[] = {
+            								 "打开链接","忽略","停止查询"
+            							 };
+            							 String choose = (String) JOptionPane.showInputDialog(null,"项目名称："+ pname + "\n项目id:" + resultlist[size] + "\n项目时间：" + startdate + "\n已参加的人数/总可参加的人数：" + maxpeo + "/" + peojoined, "结果：",JOptionPane.QUESTION_MESSAGE, null, listofmenu,null);
+            							 System.out.println(choose);
+            							 if(choose == "打开链接") {
+            								 URI u = new URI("http://www.sva.org.cn/default.aspx?_c=Program&ProgramID=" + resultlist[size]);
+            								 java.awt.Desktop d=java.awt.Desktop.getDesktop();
+            								 if(d.isSupported(java.awt.Desktop.Action.BROWSE)){
+            							                  //获取系统默认浏览器打开链接
+            									                   d.browse(u);
+            							     }
+            							 }else if(choose == "停止查询"){
+            								 System.gc();
+            								 break;
+            							 }
             							 System.out.println(resultlist[size]);
             							 size++;
             							 System.out.println(prsyea + "." + prsmon + "." + prsday);
@@ -90,11 +110,12 @@ public class kawashironitoriproject {
 			return resultlist;
 		}
 	}
-	private static class datasget{
+	protected static class datasget{
 		private static int PositionsAvailable;
 		private static int PositionsOccupied;
 		private static String StartDate;
 		private static int RegGroupLimit;
+		private static String ProgramName;
 		public static void datasget(String data) {
 			// TODO Auto-generated method stub
 			String response=data.substring(data.indexOf("{",5));
@@ -103,6 +124,7 @@ public class kawashironitoriproject {
 			PositionsOccupied = json.getInt("PositionsOccupied");
 			StartDate = json.getString("StartDate");
 			RegGroupLimit = json.getInt("RegGroupLimit");
+			ProgramName = json.getString("ProgramName");
 		}
 		//方法，直接拿来用，返回PositionsAvailable
 		public static int getPositionsAvailable() {
@@ -122,6 +144,9 @@ public class kawashironitoriproject {
 		public static int getRegGroupLimit() {
 
 			return RegGroupLimit;
+		}
+		public static String ProgramName() {
+			return ProgramName;
 		}
 	}
 }

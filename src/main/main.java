@@ -14,6 +14,7 @@ public class main {
 	 protected static int mao;
 	 protected static List results1;
 	 protected static String[] sresult;
+	 protected static boolean showagain = true;
      protected static void frame() {
     	 //以下是窗体本身相关构造代码
         JFrame frmSvamc;
@@ -82,12 +83,12 @@ public class main {
 					boolean islocal = radioButton.isSelected();
 					int [] resultlist = new int[200000];
 					try {
-					resultlist = kawashironitoriproject.main.find(islocal,Integer.parseInt(textField.getText()));
+					resultlist = kawashironitoriproject.kawashironitri.find(islocal,Integer.parseInt(textField.getText()));
 					for(int i=0;i <= resultlist.length;i++ ) {
-					JOptionPane.showMessageDialog(null,resultlist[i],"Info", JOptionPane.INFORMATION_MESSAGE);
 					if(resultlist[i] == 0) {
 						break;
 					}
+					System.gc();
 					}
 					//以下负责结果输出
 					}catch(Exception e1) {
@@ -121,19 +122,19 @@ public class main {
  		internalFrame.getContentPane().setLayout(null);
  		
  		JLabel lblsvamc = new JLabel("程序名：SVAMC_深圳义工在线任务抓取器");
- 		lblsvamc.setBounds(10, 28, 250, 15);
+ 		lblsvamc.setBounds(10, 28, 290, 15);
  		internalFrame.getContentPane().add(lblsvamc);
  		
  		JLabel lblmcgithub = new JLabel("开发者：Sino0619/github;1500373874@qq.com;(2人)");
- 		lblmcgithub.setBounds(10, 45, 250, 15);
+ 		lblmcgithub.setBounds(10, 45, 330, 15);
  		internalFrame.getContentPane().add(lblmcgithub);
  		
- 		JLabel lblvalpha = new JLabel("版本号：V.alpha");
+ 		JLabel lblvalpha = new JLabel("版本号：V.Beta");
  		lblvalpha.setBounds(10, 60, 140, 15);
  		internalFrame.getContentPane().add(lblvalpha);
  		
  		JLabel lblfilesmcbkru = new JLabel("邮 箱：files233mc44@bk.ru;1500373874@qq.com");
- 		lblfilesmcbkru.setBounds(10, 76, 250, 15);
+ 		lblfilesmcbkru.setBounds(10, 76, 290, 15);
  		internalFrame.getContentPane().add(lblfilesmcbkru);
  		
  		JLabel label_1 = new JLabel("事实证明，不是所有人都很闲");
@@ -153,7 +154,7 @@ public class main {
 		JOptionPane.showMessageDialog(null,"本程序使用“Apache-2.0”开源协议合法分发，您使用本程序即默认您认真阅读并同意协议条款。","注意：", JOptionPane.WARNING_MESSAGE);
 		JOptionPane.showMessageDialog(null,"协议内容：http://choosealicense.online/licenses/apache-2.0/","协议内容：", JOptionPane.WARNING_MESSAGE);
 		mainframe.frame();
-		boolean[] result = kawashironitoriproject.main.pinging();
+		boolean[] result = kawashironitoriproject.kawashironitri.pinging();
 		if(result[0] = false) {
 			System.out.println(result[0]);
 			JOptionPane.showMessageDialog(null,"警告：网络状况不佳，可能影响抓取","Warning", JOptionPane.WARNING_MESSAGE);
