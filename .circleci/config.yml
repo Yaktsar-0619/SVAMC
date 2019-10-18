@@ -22,6 +22,10 @@ jobs:
       TERM: dumb
 
     steps:
+     - add_ssh_keys:
+          fingerprints:
+            - "5e:71:22:b2:f3:51:6f:98:6e:dc:bf:39:17:f5:ea:01"
+
       - checkout
 
       # Download and cache dependencies
